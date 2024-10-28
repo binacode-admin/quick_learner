@@ -45,6 +45,7 @@ class QuickUser(AbstractBaseUser, PermissionsMixin):
         return self.email
 
 class QuickUserProfile(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.OneToOneField(QuickUser, on_delete=models.CASCADE, related_name="profile")
     profile_picture = models.ImageField(upload_to="profile_pics/", blank=True, null=True)
     first_name = models.CharField(max_length=30)
