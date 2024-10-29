@@ -3,6 +3,8 @@ import uuid
 from django.db import models
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
+
+from learner_course.path_provider import user_directory_path
 from quick_user.models import QuickUser
 
 
@@ -56,7 +58,7 @@ class CourseContent(models.Model):
 
 class VideoContent(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    video_file = models.FileField(upload_to=unique_video_filename)
+    video_file = models.FileField(upload_to=user_directory_path)
     description = models.TextField(blank=True, null=True)
 
     def __str__(self):
@@ -65,7 +67,7 @@ class VideoContent(models.Model):
 
 class ImageContent(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    image_file = models.ImageField(upload_to="images/")
+    image_file = models.ImageField(upload_to=user_directory_path)
     caption = models.CharField(max_length=255, blank=True, null=True)
 
     def __str__(self):
