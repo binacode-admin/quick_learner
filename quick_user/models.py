@@ -1,7 +1,6 @@
 import uuid
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.db import models
-from django.utils import timezone
 
 class QuickUserManager(BaseUserManager):
     def create_user(self, email, user_category, password=None, **extra_fields):
@@ -32,14 +31,14 @@ class QuickUser(AbstractBaseUser, PermissionsMixin):
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     email = models.EmailField(unique=True)
-    user_category = models.CharField(max_length=10, choices=USER_CATEGORY_CHOICES)
+    category = models.CharField(max_length=10, choices=USER_CATEGORY_CHOICES)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 
     objects = QuickUserManager()
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["user_category"]
+    REQUIRED_FIELDS = ["category"]
 
     def __str__(self):
         return self.email

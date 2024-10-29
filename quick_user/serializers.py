@@ -14,7 +14,7 @@ class QuickUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = QuickUser
-        fields = ['id', 'email', 'user_category', 'is_active', 'profile']
+        fields = ['id', 'email', 'category', 'is_active', 'profile']
 
 
 class SignupSerializer(serializers.ModelSerializer):
@@ -23,7 +23,7 @@ class SignupSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = QuickUser
-        fields = ['email', 'user_category', 'password', 'password_confirm']
+        fields = ['email', 'category', 'password', 'password_confirm']
         extra_kwargs = {
             'password': {'write_only': True}
         }
